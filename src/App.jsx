@@ -4,13 +4,16 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import router from "./routes";
 import { RouterProvider } from 'react-router-dom';
+import { SessionProvider } from './context/SessionContext';
 
 
 function App() {
   return(
-<div className ="bg-slate-900 h-screen">
-  <div className="flex justify-center items-center h-screen">
+<div className ="bg-slate-100 h-screen">
+  <div className="flex justify-center items-center h-screen-full">
+    <SessionProvider>
     <RouterProvider router ={router} />
+    </SessionProvider>
 
   </div>
 </div>
