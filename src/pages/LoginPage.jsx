@@ -8,12 +8,12 @@ const LoginPage = () => {
         const {login} = useSession();
 
         const handleLoginSuccess = (userData) => {
-            console.log("logged in user data",userData)
+            console.log("Logged in user data", userData)
             login(userData);
             if(!userData.isMfaActive) {
-                navigate("/setup-2fa")
+                navigate("/setup2FA")
             } else{
-                navigate("/verify-2fa")
+                navigate("/verify2FA")
             }
         }
     return (

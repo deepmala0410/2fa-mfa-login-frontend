@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
 const SessionContext = createContext();
+
 export const useSession = () => useContext(SessionContext);
 
 export const SessionProvider = ({children}) => {
@@ -10,31 +11,29 @@ export const SessionProvider = ({children}) => {
 
     useEffect(() => {
         const storedUser = JSON.parse(sessionStorage.getItem("user"))
-        console.log("the use effect runs" , storedUser);
+        console.log("The use effect runs" , storedUser);
         if (storedUser){
             setUser(storedUser);
             setIsLoggedIn(true);
         }
         setLoading(false)
-    })
+    }, [])
 
     const login = (userData) => {
         setIsLoggedIn(true);
-        setuser(userData);
+        setUser(userData);
         sessionStorage.setItem("user", JSON.stringify(userData));
     }
 
     const logout = (data) => {
         if (data) {
             setIsLoggedIn(false);
-            setuser(null);
+            setUser(null);
             sessionStorage.removeItem("user");
-
         }
     };
+
     return(
-        <SessionContext.Provider
-        value={{isLoggedIn,loading, user, login, logout}}
-        >{children}</SessionContext.Provider>
+        <SessionContext.Provider value={{isLoggedIn, loading, user, login, logout}}>{children}</SessionContext.Provider>
     )
 }

@@ -8,15 +8,14 @@ import { SessionProvider } from './context/SessionContext';
 
 
 function App() {
-  return(
-<div className ="bg-slate-100 h-screen">
-  <div className="flex justify-center items-center h-screen-full">
-    <SessionProvider>
-    <RouterProvider router ={router} />
-    </SessionProvider>
-
-  </div>
-</div>
+  return (
+    <div className="bg-slate-800 h-screen">
+      <div className="flex justify-center items-center h-screen">
+        <SessionProvider>
+          <RouterProvider router={router} />
+        </SessionProvider>
+      </div>
+    </div>
   )
 }
 

@@ -1,16 +1,16 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
-import LoginPage from '../pages/LoginPage';
+import { Navigate, Outlet } from 'react-router-dom';
+import { useSession } from '../context/SessionContext';
 
 const ProtectedRoute = () => {
 
-    const {isLoggedIn, loading } = useSession();
-    console.log("logged  in ",isLoggedIn)
+    const { isLoggedIn, loading } = useSession();
+    console.log("Logged  in ", isLoggedIn)
 
-if (loading) {
-    return <div >Loading.....</div>
-}
-        return isLoggedIn ? <Outlet/> : <Navigate to="/login" />;
+    if (loading) {
+        return <div >Loading.....</div>
+    }
+    return isLoggedIn ? <Outlet /> : <Navigate to="/login" />;
 
 };
 

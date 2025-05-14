@@ -15,22 +15,22 @@ const router = createBrowserRouter([
     },
     {
         element: <ProtectedRoute />,
-        childre: [
+        children: [
 
             {
-                path: "/HomePage",
+                path: "/",
                 element: <HomePage />,
                 errorElement: <Error />,
             },
 
             {
-                path: "/setup-2fa",
+                path: "/setup2FA",
                 element: <Setup2FA />,
                 errorElement: <Error />,
             },
 
             {
-                path: "/verify-2fa",
+                path: "/verify2FA",
                 element: <Verify2FA />,
                 errorElement: <Error />,
             }

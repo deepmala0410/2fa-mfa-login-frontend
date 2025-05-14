@@ -1,7 +1,8 @@
 import React, { use, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { register , loginUser } from '../service/authApi';
-const LoginForm = () => {
+
+const LoginForm = ({onLoginSuccess}) => {
     const [isRegister, setIsRegister] = useState(false);
     const [Username, setUsername] = useState("");
     const [password,setPassword] = useState("")
@@ -10,7 +11,7 @@ const LoginForm = () => {
     const [message, setMessage] = useState("")
 
 
-    const handleRegisterToggle = ({onLoginSuccess}) => {
+    const handleRegisterToggle = () => {
        setIsRegister(!isRegister);
        setError("")
        setMessage("")
@@ -24,16 +25,16 @@ const LoginForm = () => {
             setMessage(data.message);
             setUsername("");
             setPassword("");
+            setError("")
+            console.log(data,"User data to set")
             onLoginSuccess(data)
     
         } catch (error) {
-            console.log("the err is", error.message );
+            console.log("The err is", error.message );
             setMessage("");
-
-            setError("")
+            setError("Invalid Login Credentials")
             setUsername("");
             setPassword("");
-
         }
 
     }
@@ -52,21 +53,20 @@ const LoginForm = () => {
 
     } catch (error) {
         console.log("the err is", error.message );
-        setError("something went wrong")
+        setError("Something went wrong")
         setUsername("");
         setPassword("");
         setConfirmPassword("");
-        setError("something went wrong")
         setMessage("")
     }
     }
     return (
-        <form onSubmit={isRegister ? handleRegister : handleLogin}className="bg-white rounded-lg shadow-md w-full max-w-sm mx-auto">
+        <form onSubmit={isRegister ? handleRegister : handleLogin} className="bg-white rounded-lg shadow-md w-full max-w-sm mx-auto">
             <div className='pt-6'>
-                <h2 className='text-3xl text-center font-extralight'>{isRegister ? "Create account" : "login"} Login form</h2>
+                <h2 className='text-3xl text-center font-extralight'>{isRegister ? "Create account" : "Login"}</h2>
             </div>
             <hr className='text-gray-200 mt-6 mb-6' />
-            <p className='text-centertext-gray-600 text-large font-light'>{isRegister ? "looks like you are new here!" : "we are glad to see you again"}</p>
+            <p className='text-center text-gray-600 text-large font-light'>{isRegister ? "Looks like you are new here!" : "We are glad to see you again"}</p>
             <div className='p-6'>
                 <div className='mb-4'>
                     <label className='text-gray-600 text-sm'>Username</label>
@@ -74,9 +74,9 @@ const LoginForm = () => {
                         label="Username"
                         type='text'
                         value={Username}
-                        onChange={(e)=> setUsername(e,EventTarget.value)}
+                        onChange={(e)=> setUsername(e.target.value)}
                         className='w-full p-2 border rounded mt-2'
-                        placeholder='enter your name'
+                        placeholder='Enter your name'
                         required />
 
                 </div>
@@ -86,9 +86,9 @@ const LoginForm = () => {
                         label="Password"
                         type='password'
                         value={password}
-                        onChange={(e)=> setPassword(e,EventTarget.value)}
+                        onChange={(e)=> setPassword(e.target.value)}
                         className='w-full p-2 border rounded mt-2'
-                        placeholder='enter your password'
+                        placeholder='Enter your password'
                         required />
                 </div>
                 {isRegister ? (<div className='mb-4'>
@@ -97,9 +97,9 @@ const LoginForm = () => {
                         label="confirm Password"
                         type='password'
                         value={confirmPassword}
-                        onChange={(e)=> setConfirmPassword(e,EventTarget.value)}
+                        onChange={(e)=> setConfirmPassword(e.target.value)}
                         className='w-full p-2 border rounded mt-2'
-                        placeholder='enter your password again'
+                        placeholder='Enter your password again'
                         required />
                 </div>) : ("")}
 
@@ -114,7 +114,7 @@ const LoginForm = () => {
                 </button>
                 <div>
                     <p className='pt-4 text-center text-gray-600 text-sm'>
-                        {isRegister ? "already have an account ?" : ":Dont have an account ? "}
+                        {isRegister ? "Already have an account ? " : "Dont have an account ? "}
                         <Link to="" onClick={handleRegisterToggle}>{isRegister ? "Login" : "Create account"}</Link> </p>
                 </div>
             </div>

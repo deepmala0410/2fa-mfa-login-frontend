@@ -5,15 +5,15 @@ import TwoFAVerification from "../components/TwoFAVerification";
 const Verify2FA = () => {
     const navigate = useNavigate()
 
-    const handleVerification = async (data){
+    const handleVerification = async (data) => {
         if (data) {
-            navigate("/"):
+            navigate("/")
         }
     }
 
     const handle2FAReset = async (data) => {
         if (data) {
-            navigate("setup-2fa")
+            navigate("/setup2FA")
         }
     }
     return (

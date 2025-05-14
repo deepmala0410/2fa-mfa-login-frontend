@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { verify2FA } from '../service/authApi';
+import { verify2FA, reset2FA } from '../service/authApi';
 
-const TwoFAVerification = (onVerifySuccess, onResetSuccess) => {
-
+const TwoFAVerification = ({onVerifySuccess, onResetSuccess}) => {
     const [otp, setOtp] = useState("");
-    const [error, setError ] = useState("");
+    const [error, setError] = useState("");
 
 const handleTokenVerification = async(e) => {
     e.preventDefault();
@@ -13,8 +12,8 @@ const handleTokenVerification = async(e) => {
         onVerifySuccess(data)
     } catch (error) {
         setOtp("");
-        console.log("The err is", error.message)
-        setError("invalid OTP");
+        console.log("The err is : ", error.message)
+        setError("Invalid OTP");
         
     }
 }
@@ -24,8 +23,7 @@ const handleReset = async() => {
         const {data } = await reset2FA();
         onResetSuccess(data);
     } catch (error) {
-        setOtp("");
-        console.log("The err is", error.message)
+        console.log("The err is : ", error.message)
         setError(error.message);
         
     }
@@ -36,22 +34,22 @@ const handleReset = async() => {
             className="bg-white rounded-lg shadow-md w-full max-w-sm mx-auto">
             <div className='pt-6'>
                 <h2 className='text-3xl text-center font-extralight'>
-                    validate the otp</h2>
+                    Validate the otp</h2>
             </div>
             <hr className='text-gray-200 mt-6 mb-6' />
-            <p className='text-centertext-gray-600 text-large font-light'>
-                please enter 6 digit otp for mfa
+            <p className='text-center text-gray-600 text-large font-light'>
+                Please enter 6-digit TOTP for MFA
             </p>
             <div className='p-6'>
                 <div className='mb-4'>
-                    <label className='text-gray-600 text-sm'>TOTO</label>
+                    <label className='text-gray-600 text-sm'>TOTP</label>
                     <input
                         label="TOTP"
                         type='text'
                         value={otp}
-                        onChange={(e) => setOtp(e, EventTarget.value)}
+                        onChange={(e) => setOtp(e.target.value)}
                         className='w-full p-2 border rounded mt-2'
-                        placeholder='enter your otp'
+                        placeholder='Enter your TOTP'
                         required />
 
                 </div>
@@ -59,17 +57,17 @@ const handleReset = async() => {
 
                 <button
                     type='submit'
-                    className='w-full bg-blue-500 text-white py-2 rounded-md'
+                    className='w-full bg-blue-500 text-white py-2 rounded-md mb-3'
                 >
-                    verify the otp
+                    Verify the TOTP
                 </button>
 
                 <button
                     type='button'
-                    className='w-full bg-slat6-500 text-white py-2 rounded-md'
+                    className='w-full bg-slate-500 text-white py-2 rounded-md'
                     onClick={handleReset}
                 >
-                    reset 2fa
+                    Reset 2FA
                 </button>
              
             </div>
