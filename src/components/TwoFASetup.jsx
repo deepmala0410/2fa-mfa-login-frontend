@@ -1,6 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
-const TwoFASetup = () => {
+const TwoFASetup = (onSetupComplete) => {
+    const [response, setResponse] = useState({})
+    const [message, setMessage] = useState("")
+
+
+    const fetchQRCode = async () => {
+        const { data } = await setup2FA();
+        console.log(data);
+
+        setResponse(data);
+
+    }
+
+    useEffect(() => {
+        fetchQRCode()
+    }, [])
+
+    const copyClipBoard = async () => {
+        await navigator.clipboard.writeText(response.secret);
+        setMessage("secret copied to clipboard")
+    }
     return (
         <div
             className="bg-white rounded-lg shadow-md w-full max-w-sm mx-auto">
@@ -14,7 +35,8 @@ const TwoFASetup = () => {
             </p>
             <div className='p-6'>
                 <div className='flex justify-center'>
-                    <img src="" alt="2fa QR code" className='mb-4 border rounded-md' />
+                    {response.qrCode ? (                    <img src={response.qrCode} alt="2fa QR code" className='mb-4 border rounded-md' />
+) : ("")}
 
                 </div>
                 <div className='flex items-center mt-3 mb-3'>
@@ -26,11 +48,13 @@ const TwoFASetup = () => {
                         <div className='border-t border-1 border-gray-200 flex-grow'>
                         </div>
                         <div className='mb-6'>
-                            <input readOnly defaultValue="" value="" className='w-full border rounded mt-2 text-xs text-gray-600 p-4'
-                            onClick={copyClipBoard}
+                            {message && <p className='text=green-600 text-sm mb-3'>{message}</p>}
+                            <input readOnly defaultValue="" value={response.secret} className='w-full border rounded mt-2 text-xs text-gray-600 p-4'
+                                onClick={copyClipBoard}
                             ></input>
                         </div>
-                        <button onClick={onSetupComplete} className='w-full bg-blue-500 text-white py-2 rounded-md'>continue to varification</button>
+                        <button onClick={onSetupComplete} className='w-full bg-blue-500 text-white py-2 rounded-md'>
+                            continue to varification</button>
                     </div>
                 </div>
             </div>
