@@ -24,14 +24,19 @@ const TwoFASetup = () => {
 
                         </div>
                         <div className='border-t border-1 border-gray-200 flex-grow'>
-
                         </div>
+                        <div className='mb-6'>
+                            <input readOnly defaultValue="" value="" className='w-full border rounded mt-2 text-xs text-gray-600 p-4'
+                            onClick={copyClipBoard}
+                            ></input>
+                        </div>
+                        <button onClick={onSetupComplete} className='w-full bg-blue-500 text-white py-2 rounded-md'>continue to varification</button>
                     </div>
                 </div>
             </div>
-            </div>
+        </div>
     )
 
-            
-}  
-            export default TwoFASetup;
+
+}
+export default TwoFASetup;

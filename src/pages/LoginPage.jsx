@@ -20,5 +20,4 @@ const LoginPage = () => {
         <LoginForm onLoginSuccess={handleLoginSuccess} />
     )
 };
-
 export default LoginPage;

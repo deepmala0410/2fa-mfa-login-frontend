@@ -74,7 +74,7 @@ const LoginForm = () => {
                         label="Username"
                         type='text'
                         value={Username}
-                        onChange={(e)= setUsername(e,EventTarget.value)}
+                        onChange={(e)=> setUsername(e,EventTarget.value)}
                         className='w-full p-2 border rounded mt-2'
                         placeholder='enter your name'
                         required />
@@ -86,7 +86,7 @@ const LoginForm = () => {
                         label="Password"
                         type='password'
                         value={password}
-                        onChange={(e)= setPassword(e,EventTarget.value)}
+                        onChange={(e)=> setPassword(e,EventTarget.value)}
                         className='w-full p-2 border rounded mt-2'
                         placeholder='enter your password'
                         required />
@@ -97,7 +97,7 @@ const LoginForm = () => {
                         label="confirm Password"
                         type='password'
                         value={confirmPassword}
-                        onChange={(e)= setConfirmPassword(e,EventTarget.value)}
+                        onChange={(e)=> setConfirmPassword(e,EventTarget.value)}
                         className='w-full p-2 border rounded mt-2'
                         placeholder='enter your password again'
                         required />
